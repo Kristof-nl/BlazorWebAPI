@@ -1,5 +1,4 @@
-﻿using BlazorWebAPI.Filters;
-using BlazorWebAPI.Models;
+﻿using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorWebAPI.Controllers
@@ -23,19 +22,11 @@ namespace BlazorWebAPI.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateV1([FromBody] Ticket ticket)
+        public IActionResult Create([FromBody] Ticket ticket)
         {
             return Ok(ticket);
         }
 
-
-        [HttpPost]
-        [Route("/api/v2/tickets")]
-        [Ticket_ValidateDatesActionFilter]
-        public IActionResult CreateV2([FromBody] Ticket ticket)
-        {
-            return Ok(ticket);
-        }
 
         [HttpPut]
         public IActionResult Update([FromBody] Ticket ticket)
