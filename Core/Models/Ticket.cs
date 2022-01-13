@@ -30,6 +30,14 @@ namespace Core.Models
 
         public Project Project { get; set; }
 
+
+
+        //Validate description
+        public bool ValidateDescription()
+        {
+            return !string.IsNullOrWhiteSpace(Description);
+        }
+
         //When creating ticket, if due date is entered, it has to be in the future.
         public bool ValidateFutureDueDate()
         {

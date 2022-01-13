@@ -1,20 +1,21 @@
-﻿using Core.Models;
+﻿using BlazorWebAPI.Filters.V2;
+using Core.Models;
 using DataStore.EF;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlazorWebAPI.Controllers
+namespace BlazorWebAPI.Controllers.V2
 {
-    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     [ApiController]
-    [Route("api/[controller]")]
-    public class TicketsController : ControllerBase
+    [Route("api/tickets")]
+    public class TicketsV2Controller : ControllerBase
     {
         private readonly BugsContext db;
 
-        public TicketsController(BugsContext _db)
+        public TicketsV2Controller(BugsContext _db)
         {
             db = _db;
         }
@@ -38,6 +39,7 @@ namespace BlazorWebAPI.Controllers
 
 
         [HttpPost]
+        [Ticket_EnsureDescriptionPresentActionFilter]
         public async Task<IActionResult> Create([FromBody] Ticket ticket)
         {
             db.Tickets.Add(ticket);
@@ -48,6 +50,7 @@ namespace BlazorWebAPI.Controllers
 
 
         [HttpPut("{id}")]
+        [Ticket_EnsureDescriptionPresentActionFilter]
         public async Task<IActionResult> Update(int id, [FromBody] Ticket ticket)
         {
             if (id != ticket.TicketId) return BadRequest();

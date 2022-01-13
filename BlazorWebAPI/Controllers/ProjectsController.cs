@@ -3,9 +3,11 @@ using DataStore.EF;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlazorWebAPI.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
     [Route("api/[controller]")]
     public class ProjectsController : ControllerBase
@@ -18,16 +20,16 @@ namespace BlazorWebAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok(db.Projects.ToList());
+            return Ok(await db.Projects.ToListAsync());
         }
 
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var project = db.Projects.Find(id);
+            var project = await db.Projects.FindAsync(id);
             if (project == null)
                 return NotFound();
 
@@ -36,9 +38,9 @@ namespace BlazorWebAPI.Controllers
 
         [HttpGet]
         [Route("/api/projects/{pid}/tickets")]
-        public IActionResult GetProjectsTickets(int pid)
+        public async Task<IActionResult> GetProjectsTickets(int pid)
         {
-            var tickets = db.Tickets.Where(t => t.ProjectId == pid).ToList();
+            var tickets = await db.Tickets.Where(t => t.ProjectId == pid).ToListAsync();
             if (tickets == null || tickets.Count <= 0)
                 return NotFound();
 
@@ -47,16 +49,16 @@ namespace BlazorWebAPI.Controllers
 
 
         [HttpPost]
-        public IActionResult Create([FromBody] Project project)
+        public async Task<IActionResult> Create([FromBody] Project project)
         {
-            db.Projects.Add(project);
-            db.SaveChanges();
+            await db.Projects.AddAsync(project);
+            await db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetById), new { id = project.ProjectId }, project );
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Project project)
+        public async Task<IActionResult> Update(int id, Project project)
         {
             if (id != project.ProjectId) return BadRequest();
 
@@ -64,11 +66,11 @@ namespace BlazorWebAPI.Controllers
 
             try
             {
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch
             {
-                if (db.Projects.Find(id) == null)
+                if (await db.Projects.FindAsync(id) == null)
                     return NotFound();
             }
 
@@ -77,13 +79,13 @@ namespace BlazorWebAPI.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var project = db.Projects.Find(id);
+            var project = await db.Projects.FindAsync(id);
             if (project == null) return NotFound();
 
             db.Projects.Remove(project);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return Ok(project);
         }

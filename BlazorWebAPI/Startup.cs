@@ -2,6 +2,7 @@ using DataStore.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,14 +31,24 @@ namespace BlazorWebAPI
         {
             if (_env.IsDevelopment())
             { 
-            services.AddDbContext<BugsContext>(options =>
-           {
-               options.UseInMemoryDatabase("Bugs");
+                services.AddDbContext<BugsContext>(options =>
+               {
+                   options.UseInMemoryDatabase("Bugs");
 
-           });
+               });
+            }
 
             services.AddControllers();
-            }
+
+            services.AddApiVersioning(options =>
+            {
+                options.ReportApiVersions = true;
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+                //options.ApiVersionReader = new HeaderApiVersionReader("X-API-Version");
+
+            });
+            
 
         }
 
