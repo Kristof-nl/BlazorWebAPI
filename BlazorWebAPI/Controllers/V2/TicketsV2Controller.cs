@@ -1,8 +1,10 @@
-﻿using BlazorWebAPI.Filters.V2;
+﻿using BlazorWebAPI.Filters.QueryFilters;
+using BlazorWebAPI.Filters.V2;
 using Core.Models;
 using DataStore.EF;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,9 +23,24 @@ namespace BlazorWebAPI.Controllers.V2
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] TicketQueryFilter ticketQueryFilter)
         {
-            return Ok(await db.Tickets.ToListAsync());
+            IQueryable<Ticket> tickets = db.Tickets;
+
+            if (ticketQueryFilter != null)
+            {
+                if (ticketQueryFilter.Id.HasValue)
+                    tickets = tickets.Where(x => x.TicketId == ticketQueryFilter.Id);
+
+                if (!string.IsNullOrWhiteSpace(ticketQueryFilter.Title))
+                    tickets = tickets.Where(x => x.Title.Contains(tickets.First().Title,
+                        StringComparison.OrdinalIgnoreCase));
+
+                if (!string.IsNullOrWhiteSpace(ticketQueryFilter.Description))
+                    tickets = tickets.Where(x => x.Description.Contains(tickets.First().Description,
+                        StringComparison.OrdinalIgnoreCase));
+            }
+            return Ok(await tickets.ToListAsync());
         }
 
 
