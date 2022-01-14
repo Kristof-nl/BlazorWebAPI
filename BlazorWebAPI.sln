@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAPI", "BlazorWebAP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{153E3F50-3311-4BDB-9C6A-3884A149E949}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStore.EF", "DataStore.EF\DataStore.EF.csproj", "{8065FF5A-4360-44CC-AE70-98214A9BEDE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStore.EF", "DataStore.EF\DataStore.EF.csproj", "{8065FF5A-4360-44CC-AE70-98214A9BEDE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Repository", "App.Repository\App.Repository.csproj", "{76D0D575-DE19-43F9-9095-8AB11820BB6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Testing.Console", "App.Testing.Console\App.Testing.Console.csproj", "{4CFBBACB-C49A-46ED-8230-2D9512E87B42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{8065FF5A-4360-44CC-AE70-98214A9BEDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8065FF5A-4360-44CC-AE70-98214A9BEDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8065FF5A-4360-44CC-AE70-98214A9BEDE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76D0D575-DE19-43F9-9095-8AB11820BB6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76D0D575-DE19-43F9-9095-8AB11820BB6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76D0D575-DE19-43F9-9095-8AB11820BB6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76D0D575-DE19-43F9-9095-8AB11820BB6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CFBBACB-C49A-46ED-8230-2D9512E87B42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CFBBACB-C49A-46ED-8230-2D9512E87B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CFBBACB-C49A-46ED-8230-2D9512E87B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CFBBACB-C49A-46ED-8230-2D9512E87B42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
