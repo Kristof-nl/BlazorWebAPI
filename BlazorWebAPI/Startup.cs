@@ -31,12 +31,12 @@ namespace BlazorWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             if (_env.IsDevelopment())
-            { 
-                services.AddDbContext<BugsContext>(options =>
-               {
-                   options.UseInMemoryDatabase("Bugs");
+            {
 
-               });
+                services.AddDbContext<BugsContext>(options =>
+                {
+                    options.UseInMemoryDatabase("Bugs");
+                });
             }
 
             services.AddControllers();
