@@ -1,0 +1,28 @@
+﻿@page "/"
+@using MyApp.ApplicationLogic
+
+@inject IProjectsScreenUseCases ProjectsScreenUseCases
+
+<h3>Projects</h3>
+<br/>
+@if (projects != null)
+{
+    <ul>
+        @foreach (var project in projects)
+        {
+            <li>@project.Name</li>
+        }
+    </ul>
+
+}
+
+
+@code {
+    IEnumerable<Project> projects;
+
+    protected override async Task OnInitializedAsync()
+    {
+        projects = await ProjectsScreenUseCases.ViewProjectsAsync();
+    }
+
+}

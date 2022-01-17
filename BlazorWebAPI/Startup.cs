@@ -57,7 +57,16 @@ namespace BlazorWebAPI
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "My Web API v1", Version = "v1" });
                 options.SwaggerDoc("v2", new OpenApiInfo { Title = "My Web API v2", Version = "v2" });
             });
-            
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("https://localhost:44344")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
 
         }
 
@@ -82,6 +91,8 @@ namespace BlazorWebAPI
 
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {

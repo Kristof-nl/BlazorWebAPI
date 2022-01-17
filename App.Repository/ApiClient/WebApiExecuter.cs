@@ -6,7 +6,7 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Repository.ApiClient
+namespace MyApp.Repository.ApiClient
 {
     public class WebApiExecuter : IWebApiExecuter
     {

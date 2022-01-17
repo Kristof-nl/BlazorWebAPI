@@ -1,5 +1,5 @@
-﻿using App.Repository;
-using App.Repository.ApiClient;
+﻿using MyApp.Repository;
+using MyApp.Repository.ApiClient;
 using Core.Models;
 using System;
 using System.Net.Http;

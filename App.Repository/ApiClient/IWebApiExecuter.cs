@@ -1,7 +1,7 @@
 ﻿using Core.Models;
 using System.Threading.Tasks;
 
-namespace App.Repository.ApiClient
+namespace MyApp.Repository.ApiClient
 {
     public interface IWebApiExecuter
     {
